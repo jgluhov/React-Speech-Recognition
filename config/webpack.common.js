@@ -1,6 +1,8 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const helpers = require('./helpers');
+console.log(helpers.root('src'));
 
 module.exports = {
     entry: './src/app',
@@ -20,7 +22,7 @@ module.exports = {
 
     plugins: [
         new CleanWebpackPlugin(['docs'], {
-            root: path.resolve(__dirname, '..'),
+            root: helpers.root(),
         }),
         new HtmlWebpackPlugin({
             template: './src/index.html',
