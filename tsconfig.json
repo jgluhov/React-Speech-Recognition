@@ -5,7 +5,15 @@
         "skipLibCheck": true,
         "moduleResolution": "node",
         "baseUrl": ".",
-        "jsx": "react"
+        "jsx": "react",
+        "paths": {
+            "@components": [
+                "src/components"
+            ],
+            "@containers": [
+                "src/containers"
+            ]
+        },
     },
     "exclude": [
         "node_modules"

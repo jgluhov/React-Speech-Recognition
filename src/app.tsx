@@ -1,13 +1,9 @@
+import { Counter } from '@containers';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
-const Messager = (props) => {
-    return (
-        <div>{props.text}</div>
-    )
-}
+import './app.scss';
 
 ReactDOM.render(
-    <Messager text="Hello World" />,
+    <Counter />,
     document.getElementById('app')
 );
