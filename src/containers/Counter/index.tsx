@@ -1,5 +1,6 @@
-import { Button } from '@components';
+import { CounterButton } from '@components';
 import * as React from 'react';
+import './styles.scss';
 
 interface CounterState {
     count: number;
@@ -12,13 +13,17 @@ export class Counter extends React.Component<{}, CounterState> {
 
     public render() {
         return (
-            <div>
+            <div className="Counter">
                 <div className="Counter__screen">
                     {this.state.count}
                 </div>
                 <div className="Counter__dashboard">
-                    <Button text={'Increase'} handleClick={this.increase} />
-                    <Button text={'Decrease'} handleClick={this.decrease} />
+                    <CounterButton text={'Decrease'} 
+                        type={'decrease'} 
+                        handleClick={this.decrease} />
+                    <CounterButton text={'Increase'} 
+                        type={'increase'} 
+                        handleClick={this.increase} />
                 </div>
             </div>
         );

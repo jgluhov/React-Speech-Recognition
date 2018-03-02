@@ -1,0 +1,17 @@
+.Counter {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Counter__screen {
+    flex: 1;
+}
+
+.Counter__dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+}
