@@ -20,4 +20,4 @@ export function CounterButton(props: ButtonProps) {
             {props.text}
         </button>
     );
-};
+}

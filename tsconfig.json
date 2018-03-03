@@ -12,6 +12,9 @@
             ],
             "@containers": [
                 "src/containers"
+            ],
+            "@actions": [
+                "src/actions"
             ]
         },
     },
