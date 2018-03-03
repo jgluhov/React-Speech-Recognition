@@ -1,21 +1,21 @@
+import { connect } from 'react-redux';
 import { CounterButton } from '@components';
 import * as React from 'react';
+import * as counterActions from '@actions';
 import './styles.scss';
 
-interface CounterState {
+interface CounterProps {
     count: number;
+    increaseCounter: () => void;
+    decreaseCounter: () => void;
 }
 
-export class Counter extends React.Component<{}, CounterState> {
-    state = {
-        count: 0
-    };
-
+class CounterComponent extends React.Component<CounterProps, {}> {
     public render() {
         return (
             <div className="Counter">
                 <div className="Counter__screen">
-                    {this.state.count}
+                    {this.props.count}
                 </div>
                 <div className="Counter__dashboard">
                     <CounterButton text={'Decrease'} 
@@ -30,14 +30,28 @@ export class Counter extends React.Component<{}, CounterState> {
     }
 
     private increase = () => {
-        this.setState({
-            count: this.state.count + 1
-        });
+        this.props.increaseCounter();
     }
 
     private decrease = () => {
-        this.setState({
-            count: this.state.count - 1
-        });
+        this.props.decreaseCounter();
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        count: state.count
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        increaseCounter: () => dispatch(counterActions.increase()),
+        decreaseCounter: () => dispatch(counterActions.decrease())
+    };
+};
+
+export const Counter = connect(
+    mapStateToProps, 
+    mapDispatchToProps
+)(CounterComponent);

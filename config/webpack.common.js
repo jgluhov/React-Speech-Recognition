@@ -11,7 +11,8 @@ module.exports = {
         extensions: ['.tsx', '.js'],
         alias: {
             '@components': helpers.root('src', 'components'),
-            '@containers': helpers.root('src', 'containers')
+            '@containers': helpers.root('src', 'containers'),
+            '@actions': helpers.root('src', 'actions')
         }
     },
 

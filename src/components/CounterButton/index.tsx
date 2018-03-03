@@ -8,7 +8,7 @@ interface ButtonProps {
     handleClick: () => void;
 }
 
-export const CounterButton = (props: ButtonProps) => {
+export function CounterButton(props: ButtonProps) {
     const btnClass = classNames({
         'Button': true,
         [`Button--${props.type}`]: true
