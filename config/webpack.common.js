@@ -36,6 +36,17 @@ module.exports = {
                     fallback: 'style-loader'
                 })
             },
+            {
+                test: /\.(png)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192
+                        }
+                    }
+                ]
+            }
         ]
     },
 

@@ -5,6 +5,8 @@ const helpers = require('./helpers');
 
 
 module.exports = webpackMerge(commonConfig, {
+    devtool: 'inline-source-map',
+
     output: {
         path: helpers.root('docs'),
         filename: 'js/bundle.js',

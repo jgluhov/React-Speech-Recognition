@@ -1,4 +1,5 @@
 import { Counter } from '@containers';
+import { Dictaphone } from '@components';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createStore } from 'redux';
@@ -10,7 +11,10 @@ const store = createStore(counter);
 
 ReactDOM.render(
     <Provider store={store}>
-        <Counter />
+        <div className="App">
+            <Counter />
+            <Dictaphone />
+        </div>
     </Provider>,
     document.getElementById('app')
 );
