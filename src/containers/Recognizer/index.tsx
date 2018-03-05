@@ -88,11 +88,15 @@ class RecognizerComponent extends React.Component<RecognizerProps, RecognizerSta
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({recognizer: recognizerState}) => {
+    const { welcome, command } = recognizerState;
+    
     return {
-        welcome: 'What to do ?',
-        command: ''
+        welcome, 
+        command
     };
 };
 
-export const Recognizer = connect(mapStateToProps)(RecognizerComponent);
+export const Recognizer = connect(
+    mapStateToProps
+)(RecognizerComponent);

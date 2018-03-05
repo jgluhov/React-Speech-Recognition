@@ -38,9 +38,9 @@ class CounterComponent extends React.Component<CounterProps, {}> {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({counter: counterState}) => {
     return {
-        count: state.count
+        count: counterState.count
     };
 };
 
