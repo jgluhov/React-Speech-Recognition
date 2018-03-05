@@ -16,7 +16,10 @@ interface RecognizerState {
 class RecognizerComponent extends React.Component<{}, RecognizerState> {
     recognition: SpeechRecognition = new SpeechRecognition();
     speechRecognitionList: SpeechGrammarList = new SpeechGrammarList();
-    grammar: string = '#JSGF V1.0; grammar actions; public <action> = decrease | increase;';
+    grammar: string = `
+        #JSGF V1.0; grammar actions; 
+        public <action> = decrease | increase;
+    `;
     state: RecognizerState = {
         recognitionState: RecognitionStates.DISCONNECTED
     };
@@ -25,7 +28,7 @@ class RecognizerComponent extends React.Component<{}, RecognizerState> {
         this.speechRecognitionList.addFromString(this.grammar, 1);
         this.recognition.grammars = this.speechRecognitionList;
         this.recognition.lang = 'en-US';
-        this.recognition.interimResults = true;
+        this.recognition.interimResults = false;
         this.recognition.onend = this.handleEnd;
         this.recognition.onstart = this.handleStart;
         this.recognition.onresult = this.handleResult;
@@ -38,7 +41,8 @@ class RecognizerComponent extends React.Component<{}, RecognizerState> {
         });
     }
 
-    handleEnd = () => {
+    handleEnd = (e) => {
+        console.log(e);
         console.log('ended');
         this.setState({
             recognitionState: RecognitionStates.DISCONNECTED
