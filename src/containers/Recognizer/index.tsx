@@ -35,15 +35,12 @@ class RecognizerComponent extends React.Component<{}, RecognizerState> {
     }
 
     handleStart = () => {
-        console.log('started');
         this.setState({
             recognitionState: RecognitionStates.CONNECTED
         });
     }
 
     handleEnd = (e) => {
-        console.log(e);
-        console.log('ended');
         this.setState({
             recognitionState: RecognitionStates.DISCONNECTED
         });
@@ -64,8 +61,7 @@ class RecognizerComponent extends React.Component<{}, RecognizerState> {
 
     handleStopRecording = () => {
         if (this.state.recognitionState === RecognitionStates.CONNECTED) {
-            console.log('stop');
-            // this.recognition.stop();
+            this.recognition.stop();
         }
     }
 
