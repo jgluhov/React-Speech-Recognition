@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { MicrophoneButton } from '@components';
+import { MicrophoneButton, Input } from '@components';
 import './styles.scss';
 
 enum RecognitionStates {
@@ -13,7 +13,12 @@ interface RecognizerState {
     recognitionState: RecognitionStates;
 }
 
-class RecognizerComponent extends React.Component<{}, RecognizerState> {
+interface RecognizerProps {
+    command: string;
+    welcome: string;
+}
+
+class RecognizerComponent extends React.Component<RecognizerProps, RecognizerState> {
     recognition: SpeechRecognition = new SpeechRecognition();
     speechRecognitionList: SpeechGrammarList = new SpeechGrammarList();
     grammar: string = `
@@ -76,9 +81,18 @@ class RecognizerComponent extends React.Component<{}, RecognizerState> {
                     recording={this.isRecording}
                     onStart={this.handleStartRecording} 
                     onStop={this.handleStopRecording} />
+                <Input placeholder={this.props.welcome}
+                    command={this.props.command} />
             </div>
         );
     }
 }
 
-export const Recognizer = connect()(RecognizerComponent);
+const mapStateToProps = (state) => {
+    return {
+        welcome: 'What to do ?',
+        command: ''
+    };
+};
+
+export const Recognizer = connect(mapStateToProps)(RecognizerComponent);
