@@ -1,4 +1,4 @@
-import { Counter, Recognizer } from '@containers';
+import { Counter, Recognizer, SpeechRecognitionSupport } from '@containers';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
@@ -13,10 +13,12 @@ const store = createStore(combineReducers({
 
 ReactDOM.render(
     <Provider store={store}>
-        <div className="App">
-            <Counter />
-            <Recognizer />
-        </div>
+        <SpeechRecognitionSupport>
+            <div className="App">
+                <Counter />
+                <Recognizer />
+            </div>
+        </SpeechRecognitionSupport>        
     </Provider>,
     document.getElementById('app')
 );

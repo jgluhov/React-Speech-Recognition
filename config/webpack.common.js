@@ -5,10 +5,7 @@ const helpers = require('./helpers');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    entry: [
-        './src/initiate',
-        './src/app'
-    ],
+    entry: './src/app',
 
     resolve: {
         extensions: ['.tsx', '.js'],
