@@ -62,7 +62,6 @@ module.exports = {
             minify: {
                 collapseWhitespace: true,
             },
-        }),
-        new ExtractTextPlugin('css/bundle.css')
+        })
     ]
 }

@@ -5,6 +5,7 @@
   "main": "src/main.ts",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --inline",
+    "build": "./node_modules/.bin/webpack --config ./config/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -41,6 +42,7 @@
     "tslint-config-prettier": "^1.9.0",
     "tslint-react": "^3.5.1",
     "typescript": "^2.7.2",
+    "uglifyjs-webpack-plugin": "^1.2.3",
     "url-loader": "^1.0.1",
     "webpack": "^3.11.0",
     "webpack-merge": "^4.1.1"
