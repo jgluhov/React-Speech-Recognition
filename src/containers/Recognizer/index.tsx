@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { MicrophoneButton, Input } from '@components';
+import * as counterActions from '@actions';
 import './styles.scss';
 
 enum RecognitionStates {
@@ -16,14 +17,20 @@ interface RecognizerState {
 interface RecognizerProps {
     command: string;
     welcome: string;
+    increase: () => void;
+    decrease: () => void;
 }
 
 class RecognizerComponent extends React.Component<RecognizerProps, RecognizerState> {
     recognition: SpeechRecognition = new SpeechRecognition();
     speechRecognitionList: SpeechGrammarList = new SpeechGrammarList();
+    availableCommands = [
+        'increase',
+        'decrease'
+    ];
     grammar: string = `
         #JSGF V1.0; grammar actions; 
-        public <action> = decrease | increase;
+        public <action> = increase | decrease;
     `;
     state: RecognizerState = {
         recognitionState: RecognitionStates.DISCONNECTED
@@ -51,8 +58,13 @@ class RecognizerComponent extends React.Component<RecognizerProps, RecognizerSta
         });
     }
 
-    handleResult = (e) => {
-        console.log(e);
+    handleResult = (event: SpeechRecognitionEvent) => {
+        const list: SpeechRecognitionResultList = event.results;
+        const action = list[0][0].transcript;
+        
+        if (this.availableCommands.includes(action)) {
+            this.props[action]();
+        }
     }
 
     handleStartRecording = () => {
@@ -64,12 +76,6 @@ class RecognizerComponent extends React.Component<RecognizerProps, RecognizerSta
         }
     }
 
-    handleStopRecording = () => {
-        if (this.state.recognitionState === RecognitionStates.CONNECTED) {
-            this.recognition.stop();
-        }
-    }
-
     get isRecording() {
         return this.state.recognitionState === RecognitionStates.CONNECTED;
     }
@@ -77,12 +83,16 @@ class RecognizerComponent extends React.Component<RecognizerProps, RecognizerSta
     render() {
         return (
             <div className="Recognizer">
-                <MicrophoneButton 
-                    recording={this.isRecording}
-                    onStart={this.handleStartRecording} 
-                    onStop={this.handleStopRecording} />
-                <Input placeholder={this.props.welcome}
-                    command={this.props.command} />
+                <p className="Recognizer__message">
+                    You can say any command by your voice!
+                </p>
+                <div className="Recognizer__dashboard">
+                    <MicrophoneButton 
+                        recording={this.isRecording}
+                        onStart={this.handleStartRecording} />
+                    <Input placeholder={this.props.welcome}
+                        command={this.props.command} />
+                </div>
             </div>
         );
     }
@@ -97,6 +107,14 @@ const mapStateToProps = ({recognizer: recognizerState}) => {
     };
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
+        increase: () => dispatch(counterActions.increase()),
+        decrease: () => dispatch(counterActions.decrease())
+    };
+};
+
 export const Recognizer = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps,
 )(RecognizerComponent);

@@ -3,36 +3,24 @@ import * as classNames from 'classnames';
 import './styles.scss';
 import * as microphoneUrl from './img/microphone.png';
 
-interface MicrophoneState {
-    pressed: boolean;
-}
-
 interface MicrophoneProps {
     recording: boolean;
     onStart: () => void;
-    onStop: () => void;
 }
 
-export class MicrophoneButton extends React.Component<MicrophoneProps, MicrophoneState> {
-    state: MicrophoneState = {
-        pressed: false
-    };
-
+export class MicrophoneButton extends React.Component<MicrophoneProps, {} > {
     handlePress = (e: React.MouseEvent<HTMLImageElement>) => {
         e.preventDefault();
 
-        this.setState({
-            pressed: !this.state.pressed
-        });
-
-        !this.state.pressed ?
-            this.props.onStart() : this.props.onStop();
+        if (!this.props.recording) {
+            this.props.onStart();
+        }
     }
 
     get btnClass() {
         return classNames({
             'MicrophoneButton': true,
-            'MicrophoneButton--pressed': this.state.pressed
+            'MicrophoneButton--pressed': this.props.recording
         });
     }
 
@@ -46,7 +34,7 @@ export class MicrophoneButton extends React.Component<MicrophoneProps, Microphon
     get imageClass() {
         return classNames({
             'MicrophoneButton__image': true,
-            'MicrophoneButton__image--pressed': this.state.pressed
+            'MicrophoneButton__image--pressed': this.props.recording
         });
     }
 
@@ -56,8 +44,7 @@ export class MicrophoneButton extends React.Component<MicrophoneProps, Microphon
                 <span className={this.badgeClass} />
                 <img src={`${microphoneUrl}`} 
                     className={this.imageClass}
-                    onMouseDown={this.handlePress}
-                    onMouseUp={this.handlePress} />
+                    onMouseDown={this.handlePress} />
             </div>
         );
     }
