@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { MicrophoneButton, Input } from '@components';
-import * as counterActions from '@actions';
+import { counterActions, recognizerActions } from '@actions';
 import './styles.scss';
 
 enum RecognitionStates {
@@ -109,8 +109,14 @@ const mapStateToProps = ({recognizer: recognizerState}) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        increase: () => dispatch(counterActions.increase()),
-        decrease: () => dispatch(counterActions.decrease())
+        increase: () => {
+            dispatch(counterActions.increase());
+            dispatch(recognizerActions.increase());
+        },
+        decrease: () => {
+            dispatch(counterActions.decrease()); 
+            dispatch(recognizerActions.decrease());
+        }
     };
 };
 

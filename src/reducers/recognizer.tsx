@@ -10,13 +10,13 @@ const initialState = {
 
 export const recognizer = (state: RecognizerState = initialState, action) => {
     switch (action.type) {
-        case 'COUNTER_INCREASE': {
+        case 'RECOGNIZER_COMMAND_INCREASE': {
             return Object.assign({}, state, {
                 command: 'Increase'
             });
         }
 
-        case 'COUNTER_DECREASE': {
+        case 'RECOGNIZER_COMMAND_DECREASE': {
             return Object.assign({}, state, {
                 command: 'Decrease'
             });

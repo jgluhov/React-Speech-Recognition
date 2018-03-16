@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { CounterButton } from '@components';
 import * as React from 'react';
-import * as counterActions from '@actions';
+import { counterActions } from '@actions';
 import './styles.scss';
 
 interface CounterProps {
